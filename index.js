@@ -45,8 +45,7 @@ const btn = document.getElementById('btn');
 btn.addEventListener('click', () => {
     fetch('https://backend-tau-kohl.vercel.app/api/prod/all', {
         method: 'GET',
-        credentials: 'include',
-        crossDomain: true,
+        credentials: 'include'
     }).then((res) =>{
         res.json().then((data) => {
             console.log(data);
