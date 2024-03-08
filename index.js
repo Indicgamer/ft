@@ -26,7 +26,7 @@ form.onsubmit = (e) => {
     const formData = new FormData(form,submitter);
     const [username, password] = formData.values();
     console.log(username, password);
-    fetch('http://127.0.0.1:3000/api/auth/login', {
+    fetch('https://backend-tau-kohl.vercel.app/api/auth/login', {
         method: 'POST',
         body: JSON.stringify({ username, password }),
         headers: {
@@ -49,7 +49,7 @@ form.onsubmit = (e) => {
 
 const btn = document.getElementById('btn');
 btn.addEventListener('click', () => {
-    fetch('http://127.0.0.1:3000/api/prod/all', {
+    fetch('https://backend-tau-kohl.vercel.app/api/prod/all', {
         method: 'GET',
         credentials: 'include',
     }).then((res) =>{
