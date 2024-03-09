@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Economy App</title>
+</head>
+<body>
+    <h1>Add your products</h1>
+    <form action="#">
+        <label for="product_name">Product Name</label>
+        <input type="text" id="product_name" name="name">
+        <input type="submit" value="submit">
+    </form>
+    <ul id="prodlist"></ul>
+</body>
+<script>
+    
+    const form = document.querySelector('form');
+    const ul = document.querySelector('ul');
+    const name = document.cookie.valueOf("name").split("=")[1];
+
+    let descriptions = [];
+    
+    
+    const fillList = () => {
+        fetch("https://backend-tau-kohl.vercel.app/api/prod/all/"+name,{
+        credentials: "include"
+    }).then((res)=>{
+        res.json().then((data)=>{
+            console.log(data.data);
+            descriptions = [...data.data];
+            console.log(descriptions);
+            ul.innerHTML = "";
+            descriptions.forEach((description) => {
+            const li = document.createElement('li');
+            li.textContent = description;
+            ul.appendChild(li);
+        });
+        })
+    })
+    }
+
+    fillList();
+
+   
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const product_description = form.querySelector('input[type="text"]').value;
+        fetch("https://backend-tau-kohl.vercel.app/api/prod/add",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                description: product_description
+            }),
+            credentials: "include",
+        }).then((res)=>{
+            res.json().then((data)=>{
+                console.log(data);
+                fillList();
+            })
+        })
+    });
+</script>
+</html>
