@@ -37,6 +37,7 @@ form.onsubmit = (e) => {
     }).then((res) =>{
         res.json().then((data) => {
             console.log(data);
+            sessionStorage.setItem("name", username);
             window.location = './main.html';
         });
     } )

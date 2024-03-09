@@ -18,7 +18,7 @@
     
     const form = document.querySelector('form');
     const ul = document.querySelector('ul');
-    const name = document.cookie.valueOf("name").split("=")[1];
+    const name = sessionStorage.getItem("name");
 
     let descriptions = [];
     
